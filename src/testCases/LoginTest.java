@@ -30,6 +30,8 @@ public class LoginTest {
 	  _driver.get("https://www.facebook.com");
   }
   
+  // This test uses a data provider, which runs several test runs based on the test data in the XML file
+  
   @Test(dataProvider="LoginCredentials")
   public void LoginWithValidCredentials(String user_name, String password, String profile_name) {
 	  
@@ -50,6 +52,8 @@ public class LoginTest {
   public void testSuiteTeardown() {
   }
 
+  // DataProvider is a TestNG annotation that marks a method that returns test data to a test method
+  
   @DataProvider
   public Object[][] LoginCredentials(){
 	  xmlDataLoader data_loader = new xmlDataLoader();
