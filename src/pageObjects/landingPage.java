@@ -4,9 +4,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import pageObjects.homePage;
 
 public class landingPage 
 {
+	public WebDriver _driver;
+	
 	@FindBy(id="email")
 	public WebElement userName;
 	
@@ -18,13 +21,17 @@ public class landingPage
 
 	public landingPage(WebDriver driver)
 	{
-		PageFactory.initElements(driver, this);
+		_driver = driver;
+		PageFactory.initElements(_driver, this);
 	}
 	
-	public void Login(String username, String pass)
+	public homePage Login(String username, String pass)
 	{
 		userName.sendKeys(username);
 		password.sendKeys(pass);
 		loginButton.click();
+		
+		homePage home_page = new homePage(_driver);
+		return home_page;
 	}
 }

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<login_data>
+	<user_data>
+		<email>email</email>
+		<password>password</password>
+		<profile_name>profile name</profile_name>
+	</user_data>
+</login_data>

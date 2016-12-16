@@ -4,10 +4,14 @@ import org.testng.annotations.Test;
 import org.testng.annotations.BeforeSuite;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.AfterTest;
 import pageObjects.landingPage;
+import testData.xmlDataLoader;
+import pageObjects.homePage;
 
 public class LoginTest {
 	
@@ -16,29 +20,39 @@ public class LoginTest {
   
   // Annotations for methods @BeforeClass, @AfterClass, @BeforeTest, @AfterTest & @Test are part of TestNG library
   @BeforeSuite
-  public void beforeClass() {
-	  _driver = new FirefoxDriver();
-  }
-  
-  @Test
-  public void LoginWithValidCredentials() {
-	  landingPage landing_page = new landingPage(_driver);
-	  landing_page.Login("test1", "test1");
+  public void testSuiteSetup() {
 	  
   }
   
-  @AfterSuite
-  public void afterClass() {
-  }
-
   @BeforeTest
-  public void beforeTest() {
+  public void testSetup() {
+	  _driver = new FirefoxDriver();
 	  _driver.get("https://www.facebook.com");
+  }
+  
+  @Test(dataProvider="LoginCredentials")
+  public void LoginWithValidCredentials(String user_name, String password, String profile_name) {
+	  
+	  // This is done using the page object model
+	  landingPage landing_page = new landingPage(_driver);
+	  homePage home_page = landing_page.Login(user_name, password);
+	  
+	  // Assertion is part of TestNG
+	  Assert.assertEquals(home_page.profileUserName.getText(), profile_name);
   }
 
   @AfterTest
-  public void afterTest() {
+  public void testTeardown() {
 	  _driver.close();
   }
+  
+  @AfterSuite
+  public void testSuiteTeardown() {
+  }
 
+  @DataProvider
+  public Object[][] LoginCredentials(){
+	  xmlDataLoader data_loader = new xmlDataLoader();
+	  return data_loader.getLoginData();
+  }
 }
