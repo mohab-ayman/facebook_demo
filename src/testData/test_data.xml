@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <login_data>
 	<user_data>
-		<email>email</email>
-		<password>password</password>
-		<profile_name>profile name</profile_name>
+		<email>elakkad.donia@hotmail.co.uk</email>
+		<password>01OCT92</password>
+		<profile_name>Donia EL Akkad</profile_name>
 	</user_data>
+	<invalid_user_data>
+		<email>elakkad.donia@hotmail.co.uk</email>
+		<password>wrongpassword</password>
+		<profile_name>Donia EL Akkad</profile_name>
+	</invalid_user_data>
 </login_data>

@@ -28,7 +28,7 @@ public class xmlDataLoader {
 		}
 	}
 	
-	public Object[][] getLoginData()
+	public Object[][] getValidLoginData()
 	{
 		NodeList nList = doc.getElementsByTagName("user_data");
 		Object [][] credentials = new Object [nList.getLength()][3];
@@ -48,4 +48,24 @@ public class xmlDataLoader {
 		return credentials;
 	}
 	
+	
+	public Object[][] getInvalidLoginData()
+	{
+		NodeList nList = doc.getElementsByTagName("invalid_user_data");
+		Object [][] credentials = new Object [nList.getLength()][3];
+		
+		for (int i=0; i <nList.getLength(); i++)
+		{
+			Node nNode = nList.item(i);
+			if (nNode.getNodeType() == Node.ELEMENT_NODE) 
+			{
+				Element eElement = (Element) nNode;
+				credentials[i][0] = eElement.getElementsByTagName("email").item(0).getTextContent();
+				credentials[i][1] = eElement.getElementsByTagName("password").item(0).getTextContent();
+				credentials[i][2] = eElement.getElementsByTagName("profile_name").item(0).getTextContent();
+			}
+		}
+		
+		return credentials;
+	}
 }

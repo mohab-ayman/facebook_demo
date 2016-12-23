@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pageObjects.homePage;
+import pageObjects.loginErrorPage;
 
 public class landingPage 
 {
@@ -34,4 +35,15 @@ public class landingPage
 		homePage home_page = new homePage(_driver);
 		return home_page;
 	}
+	
+	public loginErrorPage InvalidLogin(String username, String pass)
+	{
+		userName.sendKeys(username);
+		password.sendKeys(pass);
+		loginButton.click();
+		
+		loginErrorPage LEP = new loginErrorPage(_driver);
+		return LEP;
+	}
+
 }
